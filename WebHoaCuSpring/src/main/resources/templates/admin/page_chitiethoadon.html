@@ -11,9 +11,20 @@
  crossorigin="anonymous">
 <body>
 <div layout:fragment="content">
-	<!--Content of the page-->
 
-	<div class="container">
+	
+
+	<!--Content of the page-->
+		        <!-- partial -->
+          <div class="content-wrapper">
+
+           
+            <div class="container"> 
+ 		
+		 </br>
+		<div class="card">
+             <div class="card-body">
+             	<div class="container">
  		<h3 style="text-align: center;" class="pt-4">DANH SÁCH CHI TIẾT HOÁ ĐƠN</h1> 
 		 </br>
 		 <h5 style="text-align: center;">Số hóa đơn: <span style="color:red;" th:text="${soHD}"></span></h4>
@@ -45,7 +56,17 @@
 
 		   </tbody>
 		  </table>
+		  <a th:href="@{/page_hoadon}" class="mt-5"> Quay lại </a>
  	</div>
+             
+             </div>
+        </div>
+
+ 	</div>
+           
+
+          </div>
+	<!--Content of the page-->
 </div>
 </body>
 </html>

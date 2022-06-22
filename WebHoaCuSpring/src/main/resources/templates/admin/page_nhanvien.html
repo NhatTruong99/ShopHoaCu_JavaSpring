@@ -25,7 +25,7 @@
             <div class="container"> 
  		
 <!--  		Thêm / để luôn về đúng url  -->
- 		   <form th:action="@{/searchKH}" method="get">
+ 		   <form th:action="@{/searchNV}" method="get">
  		   <div class="form-group d-flex justify-content-end">
  		   		<input class="form-control " type="text" name="keyword" th:value="${keyword}" placeholder="Tìm kiếm nhân viên" style="width: 300px;">
  		   		<div class="">
@@ -37,6 +37,7 @@
 		 	
 		 </form>
 		 </br>
+		 <a th:href = "@{/showNewNhanVienForm}" class="btn btn-primary btn-sm mb-3"> Thêm Nhân Viên</a>
 		 <div class="card">
                   <div class="card-body">
            <table border="1" class = "table table-striped table-bordered table-responsive-md">
@@ -62,12 +63,13 @@
 		    </tr>
 		   </thead>
 		   <tbody>
-		    <tr th:each="KhachHang : ${listKhachHangs}">
-		    	<td th:text="${KhachHang.maKH}"></td>
-			   	<td th:text="${KhachHang.hoTen}"></td>
-			   	<td th:text="${KhachHang.email}"></td>
-			   	<td th:text="${KhachHang.sdt}"></td>
-			   	<td th:text="${KhachHang.diaChi}"></td>
+		    <tr th:each="NhanVien : ${listNhanViens}">
+		    	<td th:text="${NhanVien.maNV}"></td>
+			   	<td th:text="${NhanVien.hoTen}"></td>
+			   	<td th:text="${NhanVien.email}"></td>
+			   	<td th:text="${NhanVien.sdt}"></td>
+			   	<td th:text="${NhanVien.diaChi}"></td>
+			   	<td th:text="${NhanVien.cmnd}"></td>
 			   	<td sec:authorize="hasAnyAuthority('Admin', 'Editor')">   		
 			   		<a class="px-2" sec:authorize="hasAnyAuthority('Admin', 'Editor')" th:href="@{/showFormForUpdateNV/{maNV}(maNV=${NhanVien.maNV})}"><i style="font-size:25px;color:blue;" class='mdi mdi-pencil-box'></i></a>
 			   		<a class="px-2" sec:authorize="hasAnyAuthority('Admin')" th:href="@{/deleteNhanVien/{maNV}(maNV=${NhanVien.maNV})}"><i style="font-size:25px;color:red;" class='mdi mdi-delete-forever mdi-5x'></i></a>	

@@ -9,7 +9,10 @@
  crossorigin="anonymous">
 <body>
 <div layout:fragment="content">
-	<div class="container">
+<div class="content-wrapper">
+		 <div class="card">
+	          <div class="card-body">
+<div class="container">
         <h2 class="mb-3">Thêm Sản Phẩm</h2>
 	 <!-- Thêm enctype ="multipart/form-data mới upload được" -->
         <form action="#" th:action="@{/saveSanPham}" th:object="${sanpham}" method="POST" enctype="multipart/form-data">
@@ -53,12 +56,27 @@
                     th:text="${LoaiSanPham.tenLoaiSP}" ></option>
             </select>
             </br>
-
-            <button type="submit" class="btn btn-info col-2"> Thêm</button>
-        </form>
-        <hr>
+            
+            <label for="maHangSX"><strong>Hãng sản xuất:</strong></label>    
+            <select  th:field="*{maHangSX}" class="form-select" > 
+                <option th:each="HSX : ${listHangSanXuats}"
+                    th:value="${HSX.maHangSX}"
+                    th:text="${HSX.tenHangSX}" >
+                 </option>
+            </select>
+            </br>
         <a th:href="@{/page_sanpham}"> Quay lại</a>
     </div>
 </div>
+            
+            <button type="submit" class="btn btn-info col-2"> Thêm</button>
+        </form>
+        <hr>
+
+	          </div>
+          </div>
+</div>
+
+	
 </body>
 </html>

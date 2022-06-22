@@ -9,7 +9,11 @@
  crossorigin="anonymous">
 <body>
 <div layout:fragment="content">
-	<div class="container">
+<div class="content-wrapper">
+		 <div class="card">
+	          <div class="card-body">
+
+<div class="container">
         <h2 class="mb-3">Cập Nhật Quyền</h2>
 
         <form action="#" th:action="@{/updateQuyen}" th:object="${quyen}" method="POST">
@@ -29,5 +33,10 @@
         <a th:href="@{/page_quyen}"> Quay lại</a>
     </div>
 </div>
+	          </div>
+          </div>
+</div>
+
+	
 </body>
 </html>

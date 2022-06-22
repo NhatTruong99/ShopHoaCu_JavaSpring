@@ -12,7 +12,7 @@ import webhoacu.spring.model.HangSanXuat;
 @Repository
 public interface HangSanXuatRepository extends JpaRepository<HangSanXuat, Long> {
 	//Custom query
-	@Query(value = "SELECT * FROM hangsanxuat hsx WHERE hsx.MaLoaiSP like %:keyword% or hsx.TenLoaiSP like %:keyword%", nativeQuery = true)
+	@Query(value = "SELECT * FROM hangsanxuat hsx WHERE hsx.MaHangSX like %:keyword% or hsx.TenHangSX like %:keyword%", nativeQuery = true)
 	List<HangSanXuat> findByKeyword(@Param("keyword") String keyword);
 	
 	

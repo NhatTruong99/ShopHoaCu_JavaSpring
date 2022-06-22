@@ -2,6 +2,8 @@ package webhoacu.spring.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -42,7 +44,7 @@ public class QuyenController {
 	 }
 	
 	@PostMapping("/saveQuyen")
-	public String saveQuyen(@ModelAttribute("quyen") Quyen quyen) {
+	public String saveQuyen(@ModelAttribute("quyen") @Valid Quyen quyen) {
 		QuyenService.saveQuyen(quyen);
 		return "redirect:/page_quyen";
 	 }

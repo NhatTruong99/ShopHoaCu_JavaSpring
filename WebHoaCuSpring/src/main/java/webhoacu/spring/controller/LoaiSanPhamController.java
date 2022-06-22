@@ -2,6 +2,8 @@ package webhoacu.spring.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 //import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +57,7 @@ public class LoaiSanPhamController {
 //	 }
 	
 	@PostMapping("/saveLoaiSanPham")
-	public String saveLSP(@ModelAttribute("loaisanpham")  LoaiSanPham loaisanpham, BindingResult bindingResult) {
+	public String saveLSP(@ModelAttribute("loaisanpham") @Valid  LoaiSanPham loaisanpham, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) 
 		{
 			return "admin/new_loaisanpham";
@@ -69,7 +71,7 @@ public class LoaiSanPhamController {
 	 }
 	
 	@PostMapping("/updateLoaiSanPham")
-	public String updateLSP(@ModelAttribute("loaisanpham") LoaiSanPham loaisanpham, BindingResult bindingResult) {
+	public String updateLSP(@ModelAttribute("loaisanpham") @Valid LoaiSanPham loaisanpham, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) 
 		{
 			return "admin/update_loaisanpham";

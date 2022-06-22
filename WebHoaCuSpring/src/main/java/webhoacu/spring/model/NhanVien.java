@@ -14,10 +14,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-//import javax.validation.constraints.Email;
-//import javax.validation.constraints.NotBlank;
-//import javax.validation.constraints.Pattern;
-//import javax.validation.constraints.Size;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -29,35 +29,37 @@ public class NhanVien {
 	  private long maNV;
 	  
 	  /* Tránh viết cả 2 trùng nhau sẽ bị lỗi */
-	  //@NotBlank(message = "Không được để trống")
+	  @NotBlank(message = "Họ tên không được để trống")
 	  @Column(name = "HoTen")
 	  private String hoTen;
 
-	  //@NotBlank(message = "Không được để trống")
-	  //@Email(message = "Nhập đúng định dạng Email")
+	  @NotBlank(message = "Email không được để trống")
+	  @Email(message = "Nhập đúng định dạng Email")
 	  @Column(name = "Email")
 	  private String email;
 
-	  //@NotBlank(message = "Không được để trống")
-	  //@Pattern(regexp="(^$|[0-9]{10})", message="Nhập đúng 10 số") /* Validate SĐT nhập đủ 10 số */
+	  @NotBlank(message = "SDT không được để trống")
+	  @Pattern(regexp="^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$", message="Số điện thoại không hợp lệ") /* Validate SĐT nhập đủ 10 số */
 	  @Column(name = "SDT")
 	  private String sdt;
 	  
-	  //@NotBlank(message = "Không được để trống")
+	  @NotBlank(message = "Đỉa chỉ không được để trống")
 	  @Column(name = "DiaChi")
 	  private String diaChi;
 	  
-	  //@NotBlank(message = "Không được để trống")
+	 
+	  @NotBlank(message = "CMND không được để trống")
+	  @Size(min = 9, max = 12, message ="Độ dài kí tự từ 9 đến 12 ")
 	  @Column(name = "CMND")
 	  private String cmnd;
 	  
-	  //@NotBlank(message = "Không được để trống")
-	  //@Size(min = 3, max = 20, message ="Độ dài kí tự từ 3 đến 20")
+	  @NotBlank(message = "Tài khoản không được để trống")
+	  @Size(min = 3, max = 20, message ="Độ dài kí tự từ 3 đến 20")
 	  @Column(name = "TaiKhoan")
 	  private String taiKhoan;
 	  
-	  //@NotBlank(message = "Không được để trống")
-	  //@Size(min = 3, max = 150, message ="Độ dài kí tự từ 3 đến 150")
+	  @NotBlank(message = "Mật khẩu không được để trống")
+	  @Size(min = 6, max = 150, message ="Độ dài kí tự từ 6 đến 150")
 	  @Column(name = "MatKhau")
 	  private String matKhau;
 	  

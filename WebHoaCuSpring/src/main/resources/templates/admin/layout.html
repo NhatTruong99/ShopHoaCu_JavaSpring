@@ -50,8 +50,8 @@ a{
       <!-- partial:partials/_navbar.html -->
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-          <a class="navbar-brand brand-logo" href="index.html"><img th:src="@{/image/logo3.png}" style="height: 100%;" alt="logo" /></a>
-          <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo" /></a>
+          <a class="navbar-brand brand-logo" href=""><img th:src="@{/image/logo3.png}" style="height: 100%;" alt="logo" /></a>
+          <a class="navbar-brand brand-logo-mini" href=""><img th:src="@{/assets/images/logo-mini.svg}" alt="logo" /></a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-stretch">
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -62,21 +62,22 @@ a{
             <li class="nav-item nav-profile dropdown">
               <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                 <div class="nav-profile-img">
-                  <img src="assets/images/faces/face1.jpg" alt="image">
+                  <img th:src="@{/assets/images/faces/face1.jpg}" alt="image">
                   <span class="availability-status online"></span>
                 </div>
                 <div class="nav-profile-text">
-                  <p class="mb-1 text-black">David Greymaax</p>
+                  <p class="mb-1 text-black" th:text="${#authentication.getPrincipal().getHoTen()}">Tên ng đăng nhập</p>
+                  <span sec:authentication="principal.authorities">Roles</span>
                 </div>
               </a>
               <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" th:href="@{/logout}">
                   <i class="mdi mdi-logout me-2 text-primary"></i> Signout </a>
               </div>
             </li>
             <li class="nav-item nav-logout d-none d-lg-block">
-              <a class="nav-link" href="#">
+              <a class="nav-link" th:href="@{/logout}">
                 <i class="mdi mdi-power"></i>
               </a>
             </li>
@@ -94,59 +95,71 @@ a{
             <li class="nav-item nav-profile">
               <a href="#" class="nav-link">
                 <div class="nav-profile-image">
-                  <img src="assets/images/faces/face1.jpg" alt="profile">
+                  <img th:src="@{/assets/images/faces/face1.jpg}" alt="profile">
                   <span class="login-status online"></span>
                   <!--change to offline or busy as needed-->
                 </div>
                 <div class="nav-profile-text d-flex flex-column">
-                  <span class="font-weight-bold mb-2">David Grey. H</span>
-                  <span class="text-secondary text-small">Project Manager</span>
+                  <span class="font-weight-bold mb-2" th:text="${#authentication.getPrincipal().getHoTen()}">David Grey. H</span>
+                  <span class="text-secondary text-small" sec:authentication="principal.authorities">Project Manager</span>
                 </div>
                 <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" th:href="@{/page_thongke}">
+              <a sec:authorize="hasAnyAuthority('Admin', 'Editor', 'User')" class="nav-link" th:href="@{/page_thongke}">
                 <span class="menu-title">Trang chủ</span>
                 <i class="mdi mdi-home menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" th:href="@{/page_sanpham}">
+              <a sec:authorize="hasAnyAuthority('Admin', 'Editor', 'User')" class="nav-link" th:href="@{/page_sanpham}">
                 <span class="menu-title">Quản lý sản phẩm</span>
                 <i class="mdi mdi-format-color-fill menu-icon"></i>
               </a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" th:href="@{/page_loaisanpham}">
+              <a sec:authorize="hasAnyAuthority('Admin', 'Editor')" class="nav-link" th:href="@{/page_loaisanpham}">
                 <span class="menu-title">Quản lý loại sản phẩm</span>
                 <i class="mdi mdi-format-color-fill menu-icon"></i>
               </a>
             </li>
 
+			<li class="nav-item">
+              <a sec:authorize="hasAnyAuthority('Admin', 'Editor')" class="nav-link" th:href="@{/page_hangsanxuat}">
+                <span class="menu-title">Quản lý hãng sản xuất</span>
+                <i class="mdi mdi-format-color-fill menu-icon"></i>
+              </a>
+            </li>
             <li class="nav-item">
-              <a class="nav-link" th:href="@{/page_nhanvien}">
+              <a sec:authorize="hasAnyAuthority('Admin', 'Editor', 'User')" class="nav-link" th:href="@{/page_nhanvien}">
                 <span class="menu-title">Quản lý nhân viên</span>
                 <i class="mdi mdi-account-multiple menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" th:href="@{/page_khachhang}">
+              <a sec:authorize="hasAnyAuthority('Admin', 'Editor', 'User')" class="nav-link" th:href="@{/page_khachhang}">
                 <span class="menu-title">Quản lý khách hàng</span>
                 <i class="mdi mdi-account-multiple menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" th:href="@{/page_hoadon}">
+              <a sec:authorize="hasAnyAuthority('Admin', 'Editor', 'User')" class="nav-link" th:href="@{/page_hoadon}">
                 <span class="menu-title">Quản lý hóa đơn</span>
                 <i class="mdi mdi-bulletin-board menu-icon"></i>
               </a>
             </li>
-            <li class="nav-item">
+            <li sec:authorize="hasAnyAuthority('Admin')" class="nav-item">
               <a class="nav-link" th:href="@{/page_phanquyen}">
                 <span class="menu-title">Quản lý phân quyền</span>
                 <i class="mdi mdi-account-network menu-icon"></i>
+              </a>
+            </li>
+            <li sec:authorize="hasAnyAuthority('Admin', 'Editor', 'User')" class="nav-item">
+              <a class="nav-link" th:href="@{/}">
+                <span class="menu-title">Trang bán hàng</span>
+                <i class="mdi mdi-cart-outline menu-icon"></i>
               </a>
             </li>
           </ul>

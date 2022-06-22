@@ -47,7 +47,9 @@ public class ThongKeController {
 		model.addAttribute("tongDoanhThu", SanPhamRepository.tongDoanhThu());
 		String Date = java.time.LocalDate.now().toString();
 		model.addAttribute("date",Date);
+		model.addAttribute("month","2022-06");
 		model.addAttribute("tongDoanhThu_Ngay", SanPhamService.tongDoanhThu_Ngay(Date));
+		model.addAttribute("tongDoanhThu_Thang", SanPhamService.tongDoanhThu_Thang("2022-06"));
 		return "admin/page_thongke";
 	}
 	
@@ -60,8 +62,13 @@ public class ThongKeController {
 			model.addAttribute("countNV", NhanVienRepository.count());
 			model.addAttribute("countHD", HoaDonRepository.count());
 			model.addAttribute("tongDoanhThu", SanPhamRepository.tongDoanhThu());
-			
-			model.addAttribute("tongDoanhThu_Ngay", SanPhamService.tongDoanhThu_Ngay(date));
+			String tongDoanhThuNgay = SanPhamService.tongDoanhThu_Ngay(date);
+			int tongDTNgay = 0;
+			if (tongDoanhThuNgay != null) {
+				tongDTNgay = Integer.parseInt(tongDoanhThuNgay);
+			}
+			model.addAttribute("date",date);
+			model.addAttribute("tongDoanhThu_Ngay", tongDTNgay);
 		}
 		else {
 			return "admin/page_thongke";
@@ -77,8 +84,13 @@ public class ThongKeController {
 			model.addAttribute("countNV", NhanVienRepository.count());
 			model.addAttribute("countHD", HoaDonRepository.count());
 			model.addAttribute("tongDoanhThu", SanPhamRepository.tongDoanhThu());
-			
-			model.addAttribute("tongDoanhThu_Thang", SanPhamService.tongDoanhThu_Ngay(month));
+			String tongDoanhThuThang = SanPhamService.tongDoanhThu_Thang(month);
+			int tongDTThang = 0;
+			if (tongDoanhThuThang != null) {
+				tongDTThang = Integer.parseInt(tongDoanhThuThang);
+			}
+			model.addAttribute("month",month);
+			model.addAttribute("tongDoanhThu_Thang", tongDTThang);
 		}
 		else {
 			return "admin/page_thongke";

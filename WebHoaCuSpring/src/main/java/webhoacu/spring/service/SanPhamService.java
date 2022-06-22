@@ -63,6 +63,11 @@ public class SanPhamService {
 		return SanPhamRepository.findByKeywordWithUserPage(keyword);
 	}
 	
+	// Tính tổng doanh thu
+	public int tongDoanhThu() {
+		return SanPhamRepository.tongDoanhThu();
+	}
+	
 	// Tính tổng doanh thu theo ngày
 	public String tongDoanhThu_Ngay(String date) {
 		return SanPhamRepository.tongDoanhThu_Ngay(date);

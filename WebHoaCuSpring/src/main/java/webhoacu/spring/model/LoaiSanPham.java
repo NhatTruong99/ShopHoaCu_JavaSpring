@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-//import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "loaisanpham")
@@ -17,7 +17,7 @@ public class LoaiSanPham {
 	  private long maLoaiSP;
 
 	/* Tránh viết cả 2 trùng nhau sẽ bị lỗi */
-	  //@NotBlank(message = "Không được để trống")
+	  @NotBlank(message = "Tên loại sản phẩm không được để trống")
 	  @Column(name = "TenLoaiSP")
 	  private String tenLoaiSP;
 

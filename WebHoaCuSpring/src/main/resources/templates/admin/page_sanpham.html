@@ -77,8 +77,8 @@
 			   	
 			   	<td sec:authorize="hasAnyAuthority('Admin', 'Editor', 'User_NhapHang', 'User_ThongKe')">
 			   		
-			   		<a class="px-2" th:href="@{/showFormForDetailSP/{maSP}(maSP=${SanPham.maSP})}"><i style="font-size:25px;color:red;" class='mdi mdi-format-list-bulleted'></i></a>
-			   		<a class="px-2" sec:authorize="hasAnyAuthority('Admin', 'Editor')" th:href="@{/showFormForUpdateSP/{maSP}(maSP=${SanPham.maSP})}"><i style="font-size:25px;color:red;" class='mdi mdi-pencil-box'></i></a>
+			   		<a class="px-2" th:href="@{/showFormForDetailSP/{maSP}(maSP=${SanPham.maSP})}"><i style="font-size:25px;color:green;" class='mdi mdi-format-list-bulleted'></i></a>
+			   		<a class="px-2" sec:authorize="hasAnyAuthority('Admin', 'Editor')" th:href="@{/showFormForUpdateSP/{maSP}(maSP=${SanPham.maSP})}"><i style="font-size:25px;color:blue;" class='mdi mdi-pencil-box'></i></a>
 			   		<a class="px-2" sec:authorize="hasAnyAuthority('Admin')" th:href="@{/deleteSanPham/{maSP}(maSP=${SanPham.maSP})}"><i style="font-size:25px;color:red;" class='mdi mdi-delete-forever mdi-5x'></i></a>
 			   		
 			   		

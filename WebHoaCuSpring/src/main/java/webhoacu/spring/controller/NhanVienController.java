@@ -2,10 +2,13 @@ package webhoacu.spring.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 //import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,43 +60,43 @@ public class NhanVienController {
 //		return "redirect:/page_nhanvien";
 //	 }
 	 
-//	@PostMapping("/saveNhanVien")
-//	public String saveNV(@ModelAttribute("nhanvien") @Valid NhanVien nhanvien, BindingResult bindingResult) {
-//		// Mã hoá mật khẩu lưu vào Database
-//		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//        String encodedPassword = passwordEncoder.encode(nhanvien.getMatKhau());
-//        nhanvien.setMatKhau(encodedPassword);
-//        
-//		if (bindingResult.hasErrors()) 
-//		{
-//			return "admin/new_nhanvien";
-//		}
-//		else 
-//		{
-//			NhanVienService.saveNhanVien(nhanvien);
-//			return "redirect:/page_nhanvien";
-//		}
-//		
-//	 }
+	@PostMapping("/saveNhanVien")
+	public String saveNV(@ModelAttribute("nhanvien") @Valid NhanVien nhanvien, BindingResult bindingResult) {
+		// Mã hoá mật khẩu lưu vào Database
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(nhanvien.getMatKhau());
+        nhanvien.setMatKhau(encodedPassword);
+        
+		if (bindingResult.hasErrors()) 
+		{
+			return "admin/new_nhanvien";
+		}
+		else 
+		{
+			NhanVienService.saveNhanVien(nhanvien);
+			return "redirect:/page_nhanvien";
+		}
+		
+	 }
 	
-//	@PostMapping("/updateNhanVien")
-//	public String updateNV(@ModelAttribute("nhanvien") @Valid NhanVien nhanvien, BindingResult bindingResult) {
-//		// Mã hoá mật khẩu lưu vào Database
-//		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//        String encodedPassword = passwordEncoder.encode(nhanvien.getMatKhau());
-//        nhanvien.setMatKhau(encodedPassword);
-//        
-//		if (bindingResult.hasErrors()) 
-//		{
-//			return "admin/update_nhanvien";
-//		}
-//		else 
-//		{
-//			NhanVienService.saveNhanVien(nhanvien);
-//			return "redirect:/page_nhanvien";
-//		}
-//		
-//	 }
+	@PostMapping("/updateNhanVien")
+	public String updateNV(@ModelAttribute("nhanvien") @Valid NhanVien nhanvien, BindingResult bindingResult) {
+		// Mã hoá mật khẩu lưu vào Database
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(nhanvien.getMatKhau());
+        nhanvien.setMatKhau(encodedPassword);
+        
+		if (bindingResult.hasErrors()) 
+		{
+			return "admin/update_nhanvien";
+		}
+		else 
+		{
+			NhanVienService.saveNhanVien(nhanvien);
+			return "redirect:/page_nhanvien";
+		}
+		
+	 }
 	
 	@GetMapping("/showFormForUpdateNV/{maNV}")
 	public String showFormForUpdateNV(@PathVariable ( value = "maNV") long maNV, Model model) {

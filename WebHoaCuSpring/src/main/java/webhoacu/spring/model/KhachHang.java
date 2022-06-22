@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 //import javax.validation.constraints.Email;
 //import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "khachhang")
@@ -22,20 +25,21 @@ public class KhachHang {
 	}
 
 	/* Tránh viết cả 2 trùng nhau sẽ bị lỗi */
-	  //@NotBlank(message = "Không được để trống")
+	  @NotBlank(message = "Họ tên không được để trống")
 	  @Column(name = "HoTen")
 	  private String hoTen;
 
-	  //@NotBlank(message = "Không được để trống")
-	  //@Email(message = "Nhập đúng định dạng Email")
+	  @NotBlank(message = "Email không được để trống")
+	  @Email(message = "Email không hợp lệ")
 	  @Column(name = "Email")
 	  private String email;
 
-	  //@NotBlank(message = "Không được để trống")
+	  @NotBlank(message = "SĐT không được để trống")
+	  @Pattern(regexp="^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$", message="Số điện thoại không hợp lệ") /* Validate SĐT nhập đủ 10 số */
 	  @Column(name = "SDT")
 	  private String sdt;
 	  
-	  //@NotBlank(message = "Không được để trống")
+	  @NotBlank(message = "Địa chỉ không được để trống")
 	  @Column(name = "DiaChi")
 	  private String diaChi;
 

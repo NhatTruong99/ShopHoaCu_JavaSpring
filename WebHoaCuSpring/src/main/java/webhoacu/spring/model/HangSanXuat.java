@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "hangsanxuat")
@@ -15,9 +16,11 @@ public class HangSanXuat {
 	  @GeneratedValue(strategy = GenerationType.IDENTITY)
 	  private long maHangSX;
 	  
+	  @NotBlank(message = "Tên hãng sản xuất không được để trống")
 	  @Column(name = "TenHangSX")
 	  private String tenHangSX;
 	  
+	  @NotBlank(message = "Đặc điểm hãng sản xuất không được để trống")
 	  @Column(name = "DacDiem")
 	  private String dacDiem;
 

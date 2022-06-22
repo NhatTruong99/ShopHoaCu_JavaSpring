@@ -14,7 +14,7 @@ import webhoacu.spring.model.NhanVien;
 public interface NhanVienRepository extends JpaRepository<NhanVien, Long>{
 
 	//Custom query
-	@Query(value = "SELECT * FROM nhanvien nv WHERE nv.MaNV like %:keyword% or nv.HoTen like %:keyword% or nv.Email like %:keyword% or nv.SDT like %:keyword% or nv.DiaChi like %:keyword% or nv.CMND like %:keyword% or nv.TaiKhoan like %:keyword% or nv.MatKhau like %:keyword% or nv.MaQuyen like %:keyword%", nativeQuery = true)
+	@Query(value = "SELECT * FROM nhanvien nv WHERE nv.MaNV like %:keyword% or nv.HoTen like %:keyword% or nv.Email like %:keyword% or nv.SDT like %:keyword% or nv.DiaChi like %:keyword% or nv.CMND like %:keyword% or nv.TaiKhoan like %:keyword%", nativeQuery = true)
 	List<NhanVien> findByKeyword(@Param("keyword") String keyword);
 
 	@Query("SELECT nv FROM NhanVien nv WHERE nv.email = ?1")

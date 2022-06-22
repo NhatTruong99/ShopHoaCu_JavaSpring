@@ -9,7 +9,11 @@
  crossorigin="anonymous">
 <body>
 <div layout:fragment="content">
-	<div class="container">
+<div class="content-wrapper">
+		 <div class="card">
+	          <div class="card-body">
+
+<div class="container">
         <h2 class="mb-3">Cập Nhật Nhân Viên</h2>
 
         <form action="#" th:action="@{/updateNhanVien}" th:object="${nhanvien}" method="POST">
@@ -51,7 +55,6 @@
             <input type="text" th:field="*{matKhau}" placeholder="Mật Khẩu" class="form-control col-4">
             <p style="color:red" th:if="${#fields.hasErrors('matKhau')}" th:errors="*{matKhau}">Mat Khau Error</p>
             </br>
-            
 <!--             <label for="maQuyen"><strong>Tên quyền:</strong></label> -->
 <!--             <select th:field="*{maQuyen}" class="form-select">  -->
 <!--             	<option th:each="Quyen : ${listQuyens}" -->
@@ -66,5 +69,10 @@
         <a th:href="@{/page_nhanvien}"> Quay lại</a>
     </div>
 </div>
+	          </div>
+          </div>
+</div>
+
+	
 </body>
 </html>

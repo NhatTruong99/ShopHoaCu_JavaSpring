@@ -16,14 +16,17 @@
     crossorigin="anonymous">
 <body>
 <div layout:fragment="content">
- 	<div class="d-flex justify-content-center " >  <!-- white-space: nowrap để chữ trên 1 hàng -->
+<div class="content-wrapper">
+		 <div class="card">
+          <div class="card-body">
+          	<div class="d-flex justify-content-center " >  <!-- white-space: nowrap để chữ trên 1 hàng -->
 			<h2 class="mt-4">Chi Tiết Sản Phẩm</h2>
 	</div>
 	<div class="container">
 		<div class="row">
 	 		<div class="col-12">
     			<form th:object="${sanpham}" method="POST" enctype="multipart/form-data">
-      				<img  th:src ="@{'/images/' + ${sanpham.anh}}" style="width: 450px;" class="rounded mx-auto d-block" />
+      				<img  th:src ="@{'/image/' + ${sanpham.anh}}" style="width: 300px;" class="rounded mx-auto d-block" />
     			</form>
     	
     		</div>
@@ -61,6 +64,14 @@
 		                    th:text="${LoaiSanPham.tenLoaiSP}" ></option>
 		            </select>
 		            </br>
+		            
+		            <label for="maHangSX"><strong>Hãng sản xuất:</strong></label>    
+		            <select th:field="*{maHangSX}" class="form-select"> 
+		                <option th:each="HangSanXuat : ${listHangSanXuats}"
+		                    th:value="${HangSanXuat.maHangSX}"
+		                    th:text="${HangSanXuat.tenHangSX}" ></option>
+		            </select>
+		            </br>
 		            </fieldset>
 		
 		        </form>
@@ -69,7 +80,13 @@
 		
         <a th:href="@{/page_sanpham}"> Quay lại</a>
     </div>
+          
+          </div>
+     </div>
+ 	
 </div>
+</div>
+
 </body>
 </html>
 

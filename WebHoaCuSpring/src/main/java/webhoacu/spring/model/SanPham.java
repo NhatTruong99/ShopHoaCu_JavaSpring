@@ -8,12 +8,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-//import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 
 import org.springframework.web.multipart.MultipartFile;
 
 @Entity
-@Table(name = "SanPham")
+@Table(name = "sanpham")
 public class SanPham {
 	
 	  @Id
@@ -21,18 +22,18 @@ public class SanPham {
 	  private long maSP;
 
 	/* Tránh viết cả 2 trùng nhau sẽ bị lỗi */
-	  //@NotBlank(message = "Tên sản phẩm không được để trống")
+	  @NotBlank(message = "Tên sản phẩm không được để trống")
 	  @Column(name = "TenSP")
 	  private String tenSP;
 
-	  //@NotBlank(message = "Không được để trống")
+	  @NotBlank(message = "Đặc điểm không được để trống")
 	  @Column(name = "DacDiem")
 	  private String dacDiem;
 
 	  @Column(name = "Anh")
 	  private String anh;
 	  
-
+	  @Positive(message = "Đơn giá phải lớn hơn 0")
 	  @Column(name = "DonGia")
 	  private int donGia;
 	  
@@ -48,7 +49,7 @@ public class SanPham {
 	 @Transient
 	 public String getPhotosImagePath() {
 		 if (anh == null) return null;
-	     	return "/images/" + anh;
+	     	return "/image/" + anh;
 	    }  
 
 	public long getMaSP() {

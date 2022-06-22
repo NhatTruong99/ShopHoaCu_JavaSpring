@@ -11,21 +11,34 @@
 <body>
 <div layout:fragment="content">
 	<!--Content of the page-->
-
-	<div class="container">
- 		<h3 class="mb-4 pt-4">DANH SÁCH HOÁ ĐƠN</h1> 
+		        <!-- partial -->
+          <div class="content-wrapper">
+            <div class="page-header">
+              <h2 class="page-title">
+                <span class="page-title-icon bg-gradient-primary text-white me-2">
+                  <i class="mdi mdi-home"></i>
+                </span> Quản lý hóa đơn
+              </h2>
+            </div>
+           
+            <div class="container"> 
  		
-<!--  	Thêm / để luôn về đúng url  -->
+<!--  		Thêm / để luôn về đúng url  -->
  		   <form th:action="@{/searchHD}" method="get">
-		 	<input type="text" name="keyword" th:value="${keyword}" placeholder="Find by Keyword" size="50">
-		 	<button type="submit" class="btn btn-primary">Search</button>
-		 	<button type="submit" class="btn btn-danger">Reset</button>
+ 		   <div class="form-group d-flex justify-content-end">
+ 		   		<input class="form-control " type="text" name="keyword" th:value="${keyword}" placeholder="Tìm kiếm hóa đơn" style="width: 300px;">
+ 		   		<div class="">
+	 		   		<button type="submit" class="btn btn-primary">Search</button>
+			 		<button type="submit" class="btn btn-danger">Reset</button>
+ 		   		</div>
+
+ 		   </div>
+		 	
 		 </form>
 		 </br>
-		 
-<!--  		 <a th:href = "@{/showNewHoaDonForm}" class="btn btn-primary btn-sm mb-3"> Thêm Hoá Đơn </a> -->
-		
-		  <table border="1" class = "table table-striped table-reHDonsive-md">
+		 <div class="card">
+                  <div class="card-body">
+           <table border="1" class = "table table-striped table-bordered table-responsive-md">
 		   <thead>
 		    <tr>
 		      <th> <a th:href="@{'/pageHD/' + ${currentPage} + '?sortField=maHD&sortDir=' + ${reverseSortDir}}">
@@ -64,13 +77,16 @@
 			   	</th:block>
 
 			   	<td sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-			   		<a th:href="@{/showFormForUpdateHD/{maHD}(maHD=${HoaDon.maHD})}"><img th:src ="@{/images/edit.png}" width="35"/></a>
-			   		<a sec:authorize="hasAnyAuthority('Admin')" th:href="@{/deleteHoaDon/{maHD}(maHD=${HoaDon.maHD})}"><img th:src ="@{/images/delete.png}" width="35"/></a>
+			   		<a class="px-2" sec:authorize="hasAnyAuthority('Admin', 'Editor')" th:href="@{/showFormForUpdateHD/{maHD}(maHD=${HoaDon.maHD})}"><i style="font-size:25px;color:blue;" class='mdi mdi-pencil-box'></i></a>
+			   		<a class="px-2" sec:authorize="hasAnyAuthority('Admin')" th:href="@{/deleteHoaDon/{maHD}(maHD=${HoaDon.maHD})}"><i style="font-size:25px;color:red;" class='mdi mdi-delete-forever mdi-5x'></i></a>	
 			   	</td>
 			   	<td><a th:href="@{/page_chitiethoadon/{maHD} (maHD=${HoaDon.maHD})}" >Xem chi tiết</a></td>
 		    </tr>
 		   </tbody>
 		  </table>
+                  </div>
+         </div>
+
 		 
 		<div class="d-flex page-list justify-content-center">
 						<div th:if="${totalPages > 1}">
@@ -95,6 +111,13 @@
 		        </div>
 		</div>
  	</div>
+           
+
+          </div>
+
+	<!--Content of the page-->
+
+	
 </div>
 </body>
 </html>

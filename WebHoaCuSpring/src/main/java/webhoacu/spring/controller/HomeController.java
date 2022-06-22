@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,34 +43,48 @@ public class HomeController {
 	@Autowired
 	private NhanVienRepository NhanVienRepository;
 	
-	 @GetMapping("/layout") 
+	@GetMapping("/layout") 
 	 public String LayoutPage(){
 	        return "admin/layout";
 	 }
+	 
+	@GetMapping("/logout")
+	public String logout() {
+		 return "admin/logout";
+	}
 	  
-//    @GetMapping("/login") 
-//    public String getLogin() {
-//        return "login";
-//    }
-    
-//    @GetMapping("/register")
-//    public String showRegistrationForm(Model model) {
-//        model.addAttribute("user", new NhanVien());
-//        model.addAttribute("listQuyens", QuyenService.getAllQuyen());
-//        return "signup_form";
-//    }
-    
-//    @PostMapping("/process_register")
-//    public String processRegister(NhanVien user) {
-//    	// Mã hoá mật khẩu lưu vào Database
-//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//        String encodedPassword = passwordEncoder.encode(user.getMatKhau());
-//        user.setMatKhau(encodedPassword);
-//         
-//        NhanVienRepository.save(user);
-//         
-//        return "register_success";
-//    }
+   @GetMapping("/login") 
+   public String showLoginPage() {
+   	
+   	return "admin/login";
+   	
+   	// Để lưu đăng nhập không cần đăng nhập lại
+//   	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//   	if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+//   		return "admin/login";
+//   	}
+//   	return "redirect:/";
+   }
+
+   
+   @GetMapping("/register")
+   public String showRegistrationForm(Model model) {
+       model.addAttribute("user", new NhanVien());
+       model.addAttribute("listQuyens", QuyenService.getAllQuyen());
+       return "signup_form";
+   }
+   
+   @PostMapping("/process_register")
+   public String processRegister(NhanVien user) {
+   	// Mã hoá mật khẩu lưu vào Database
+       BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+       String encodedPassword = passwordEncoder.encode(user.getMatKhau());
+       user.setMatKhau(encodedPassword);
+        
+       NhanVienRepository.save(user);
+        
+       return "register_success";
+   }
     
 	@GetMapping("/")
 	public String viewIndex(Model model) {

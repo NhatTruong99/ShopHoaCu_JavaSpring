@@ -11,14 +11,18 @@
 </script>
 <body>
 <div layout:fragment="content">
-	<div class="container">
+<div class="content-wrapper">
+		 <div class="card">
+	          <div class="card-body">
+
+<div class="container">
         <h2 class="mb-3">Cập Nhật Sản Phẩm</h2>
 
 		<form action="#" th:action="@{/updateSanPham}" th:object="${sanpham}" method="POST" enctype="multipart/form-data">
 
             <!-- Add hidden form field to handle update -->
             <input type="hidden" th:field="*{maSP}" />
-            
+            <input type="hidden" th:field="*{anh}" />
             <label for="tenSP"><strong>Tên sản phẩm:</strong></label>
             <input type="text" th:field="*{tenSP}" placeholder="Tên Sản Phẩm" class="form-control col-4">
             <p style="color:red" th:if="${#fields.hasErrors('tenSP')}" th:errors="*{tenSP}">Ten San Pham Error</p>
@@ -58,6 +62,13 @@
                     th:text="${LoaiSanPham.tenLoaiSP}" ></option>
             </select>
             </br>
+            <label for="maHangSX"><strong>Hãng sản xuất:</strong></label>    
+            <select th:field="*{maHangSX}" class="form-select"> 
+                <option th:each="HangSanXuat : ${listHangSanXuats}"
+                    th:value="${HangSanXuat.maHangSX}"
+                    th:text="${HangSanXuat.tenHangSX}" ></option>
+            </select>
+            </br>
             <button type="submit" class="btn btn-info col-2">Cập nhật</button>
         </form>
         <hr>
@@ -65,5 +76,10 @@
         <a th:href="@{/page_sanpham}"> Quay lại</a>
     </div>
 </div>
+	          </div>
+          </div>
+</div>
+
+	
 </body>
 </html>

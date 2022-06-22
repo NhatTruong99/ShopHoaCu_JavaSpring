@@ -3,6 +3,8 @@ package webhoacu.spring.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.validation.Valid;
+
 //import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,7 @@ import webhoacu.spring.model.MyUserDetails;
 import webhoacu.spring.model.NhanVien;
 import webhoacu.spring.model.SanPham;
 import webhoacu.spring.repository.SanPhamRepository;
+import webhoacu.spring.service.HangSanXuatService;
 import webhoacu.spring.service.LoaiSanPhamService;
 import webhoacu.spring.service.SanPhamService;
 
@@ -42,7 +45,8 @@ public class SanPhamController {
 	private LoaiSanPhamService LoaiSanPhamService;
 
 	@Autowired
-	private SanPhamRepository SanPhamRepository;
+	private HangSanXuatService hangSanXuatService;
+
 
 	@GetMapping("/403/SP")
 	public String error403_SP() {
@@ -62,6 +66,7 @@ public class SanPhamController {
 	public String viewListSP( Model model) {
 		model.addAttribute("listSanPhams", SanPhamService.getAllSanPham());
 		model.addAttribute("listLoaiSanPhams", LoaiSanPhamService.getAllLoaiSanPham());
+		model.addAttribute("listHangSanXuats", hangSanXuatService.getAllHangSanXuat());
 		return findPaginatedSanPham(1, "maSP", "asc", model);
 		// "admin/page_sanpham";
 	}
@@ -71,6 +76,7 @@ public class SanPhamController {
 		SanPham sanpham = new SanPham();
 		model.addAttribute("sanpham", sanpham);
 		model.addAttribute("listLoaiSanPhams", LoaiSanPhamService.getAllLoaiSanPham());
+		model.addAttribute("listHangSanXuats", hangSanXuatService.getAllHangSanXuat());
 		return "admin/new_sanpham";
 	}
 
@@ -80,7 +86,7 @@ public class SanPhamController {
 	// return "redirect:/page_sanpham";
 	// }
 	@PostMapping("/saveSanPham")
-    public String saveSP(@ModelAttribute("sanpham")  SanPham sanpham, BindingResult bindingResult,
+    public String saveSP(@ModelAttribute("sanpham") @Valid  SanPham sanpham, BindingResult bindingResult,
     		Model model,
     		@RequestParam("image") MultipartFile multipartFile) throws IOException {
         
@@ -91,8 +97,8 @@ public class SanPhamController {
 		//Nếu có thì cập nhập, không thì lấy lại giá trị ảnh của SanPham truyền vào 
 		if (size != 0) {
 	        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-	        String uploadDir = "src/main/resources/static/images";
-	        String uploadDir1 = "target/classes/static/images";
+	        String uploadDir = "src/main/resources/static/image";
+	        String uploadDir1 = "target/classes/static/image";
 	        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 	        FileUploadUtil.saveFile(uploadDir1, fileName, multipartFile);
 	        sanpham.setAnh(fileName);
@@ -107,18 +113,19 @@ public class SanPhamController {
         if (bindingResult.hasErrors()) 
 		{
         	model.addAttribute("listLoaiSanPhams", LoaiSanPhamService.getAllLoaiSanPham());
+        	model.addAttribute("listHangSanXuats", hangSanXuatService.getAllHangSanXuat());
 			return "admin/new_sanpham";
 			
 		}
 		else 
 		{
-			SanPham savedSanPham = SanPhamRepository.save(sanpham);
+			SanPhamService.saveSanPham(sanpham);
 			return "redirect:/page_sanpham";
 		}
     }
 	
 	@PostMapping("/updateSanPham")
-    public String updateSP(@ModelAttribute("sanpham")  SanPham sanpham, BindingResult bindingResult,
+    public String updateSP(@ModelAttribute("sanpham") @Valid  SanPham sanpham, BindingResult bindingResult,
     		Model model,
     		@RequestParam("image") MultipartFile multipartFile) throws IOException {
         
@@ -129,8 +136,8 @@ public class SanPhamController {
 		//Nếu có thì cập nhập, không thì lấy lại giá trị ảnh của SanPham truyền vào 
 		if (size != 0) {
 	        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-	        String uploadDir = "src/main/resources/static/images";
-	        String uploadDir1 = "target/classes/static/images";
+	        String uploadDir = "src/main/resources/static/image";
+	        String uploadDir1 = "target/classes/static/image";
 	        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 	        FileUploadUtil.saveFile(uploadDir1, fileName, multipartFile);
 	        sanpham.setAnh(fileName);
@@ -144,12 +151,13 @@ public class SanPhamController {
         if (bindingResult.hasErrors()) 
 		{
         	model.addAttribute("listLoaiSanPhams", LoaiSanPhamService.getAllLoaiSanPham());
+        	model.addAttribute("listHangSanXuats", hangSanXuatService.getAllHangSanXuat());
 			return "admin/update_sanpham";
 			
 		}
 		else 
 		{
-			SanPham savedSanPham = SanPhamRepository.save(sanpham);
+			SanPhamService.saveSanPham(sanpham);
 			return "redirect:/page_sanpham";
 		}
     }
@@ -161,6 +169,7 @@ public class SanPhamController {
 		model.addAttribute("sanpham", sanpham);
 		model.addAttribute("listSanPhams", SanPhamService.getAllSanPham());
 		model.addAttribute("listLoaiSanPhams", LoaiSanPhamService.getAllLoaiSanPham());
+		model.addAttribute("listHangSanXuats", hangSanXuatService.getAllHangSanXuat());
 		return "admin/detail_sanpham";
 	}
 
@@ -169,6 +178,7 @@ public class SanPhamController {
 		SanPham sanpham = SanPhamService.getSanPhamById(maSP);
 		model.addAttribute("sanpham", sanpham);
 		model.addAttribute("listLoaiSanPhams", LoaiSanPhamService.getAllLoaiSanPham());
+		model.addAttribute("listHangSanXuats", hangSanXuatService.getAllHangSanXuat());
 		return "admin/update_sanpham";
 	}
 
@@ -187,9 +197,11 @@ public class SanPhamController {
 		if (keyword != null) {
 			model.addAttribute("listSanPhams", SanPhamService.getByKeyword(keyword));
 			model.addAttribute("listLoaiSanPhams", LoaiSanPhamService.getAllLoaiSanPham());
+			model.addAttribute("listHangSanXuats", hangSanXuatService.getAllHangSanXuat());
 		} else {
 			model.addAttribute("listSanPhams", SanPhamService.getAllSanPham());
 			model.addAttribute("listLoaiSanPhams", LoaiSanPhamService.getAllLoaiSanPham());
+			model.addAttribute("listHangSanXuats", hangSanXuatService.getAllHangSanXuat());
 		}
 		return "admin/page_sanpham";
 	}
@@ -214,6 +226,7 @@ public class SanPhamController {
 
 		model.addAttribute("listSanPhams", listSanPhams);
 		model.addAttribute("listLoaiSanPhams", LoaiSanPhamService.getAllLoaiSanPham());
+		model.addAttribute("listHangSanXuats", hangSanXuatService.getAllHangSanXuat());
 		return "admin/page_sanpham";
 	}
 
